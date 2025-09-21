@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautora - Verified Reviews, Real Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(45deg, #ff9bb3, #87ceeb, #fffacd, #ff9bb3);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid transparent;
+            background-clip: padding-box;
+            border-image: linear-gradient(90deg, #ff9bb3, #87ceeb, #fffacd) 1;
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes headerGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 155, 179, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(135, 206, 235, 0.4); }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ff9bb3 0%, #87ceeb 50%, #fffacd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 155, 179, 0.5);
+            animation: logoFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #ff9bb3 0%, #87ceeb 100%);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(255, 155, 179, 0.4);
+            animation: buttonPulse 2s infinite;
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #87ceeb 0%, #fffacd 100%);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(135, 206, 235, 0.5);
+        }
+        
+        .cta-button.secondary {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            color: #ff9bb3;
+            border: 2px solid #ff9bb3;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-button.secondary:hover {
+            background: linear-gradient(135deg, #ff9bb3 0%, #87ceeb 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        main {
+            margin-top: 80px;
+        }
+        
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 155, 179, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(135, 206, 235, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 250, 205, 0.2) 0%, transparent 50%);
+            animation: heroShine 4s ease-in-out infinite;
+        }
+        
+        @keyframes heroShine {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            animation: titleBounce 1.5s ease;
+        }
+        
+        @keyframes titleBounce {
+            0% { opacity: 0; transform: translateY(50px) scale(0.8); }
+            50% { transform: translateY(-10px) scale(1.1); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .hero .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+        
+        .hero-cta {
+            margin: 0 15px;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '✨';
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .floating-elements::before {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .floating-elements::after {
+            top: 70%;
+            right: 20%;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        
+        .problem-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 100px 0;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff9bb3 0%, #87ceeb 50%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleWave 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleWave {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 250, 205, 0.3) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(255, 155, 179, 0.2);
+            animation: cardFloat 4s ease-in-out infinite;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff9bb3, #87ceeb, #fffacd, #ff9bb3);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            z-index: -1;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .problem-card:nth-child(1) { animation-delay: 0s; }
+        .problem-card:nth-child(2) { animation-delay: 0.5s; }
+        .problem-card:nth-child(3) { animation-delay: 1s; }
+        
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(255, 155, 179, 0.4);
+        }
+        
+        .problem-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            display: block;
+            animation: iconSpin 4s ease infinite;
+        }
+        
+        @keyframes iconSpin {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        
+        .problem-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+            letter-spacing: -0.01em;
+        }
+        
+        .problem-card p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .color-bar {
+            height: 6px;
+            border-radius: 3px;
+            animation: colorPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes colorPulse {
+            0%, 100% { opacity: 0.8; transform: scaleX(1); }
+            50% { opacity: 1; transform: scaleX(1.1); }
+        }
+        
+        .solution-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            padding: 100px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solution-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 155, 179, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(135, 206, 235, 0.2) 0%, transparent 50%);
+            animation: solutionGlow 5s ease-in-out infinite;
+        }
+        
+        @keyframes solutionGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .solution-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .solution-section .section-title {
+            color: white;
+            text-shadow: 2px 2px 20px rgba(255, 155, 179, 0.5);
+        }
+        
+        .solution-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 155, 179, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 155, 179, 0.6);
+            box-shadow: 0 20px 60px rgba(255, 155, 179, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, rgba(255, 155, 179, 0.1) 0%, rgba(135, 206, 235, 0.1) 50%, rgba(255, 250, 205, 0.2) 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            animation: statFloat 3s ease-in-out infinite;
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 0s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.6s; }
+        .stat-card:nth-child(4) { animation-delay: 0.9s; }
+        
+        @keyframes statFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-12px) scale(1.05);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #ff9bb3;
+            box-shadow: 0 20px 40px rgba(255, 155, 179, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff9bb3 0%, #87ceeb 50%, #2c2c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            animation: numberPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .waitlist-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 120px 0;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+        
+        .waitlist-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 155, 179, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(135, 206, 235, 0.1) 0%, transparent 50%);
+            animation: waitlistGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes waitlistGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .waitlist-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .email-form {
+            max-width: 600px;
+            margin: 3rem auto;
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            background: linear-gradient(45deg, #ff9bb3, #87ceeb, #fffacd);
+            border-radius: 50px;
+            box-shadow: 0 15px 40px rgba(255, 155, 179, 0.3);
+            animation: formGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes formGlow {
+            0%, 100% { box-shadow: 0 15px 40px rgba(255, 155, 179, 0.3); }
+            50% { box-shadow: 0 20px 50px rgba(135, 206, 235, 0.4); }
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 20px 25px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .email-input:focus {
+            background: white;
+            transform: scale(1.02);
+            box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.3);
+        }
+        
+        .email-input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .perks {
+            margin-top: 2rem;
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+            animation: perksFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes perksFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9bb3, #87ceeb, #fffacd, #ff9bb3);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            font-size: 1rem;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .email-form {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 15px;
+            }
+            
+            .email-input {
+                border-radius: 15px;
+                padding: 18px 20px;
+            }
+            
+            .cta-button {
+                border-radius: 15px;
+                padding: 18px 25px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Beautora</div>
+                <a href="#waitlist" class="cta-button">Join Waitlist</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="floating-elements"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Beauty Reviews You Can Actually Trust</h1>
+                    <p class="subtitle">Verified purchases. Real results. Community-powered insights.</p>
+                    <p class="tagline">✨ Where authenticity meets beauty ✨</p>
+                    <a href="#waitlist" class="cta-button hero-cta">Join the Revolution</a>
+                    <a href="#problem" class="cta-button secondary hero-cta">Discover More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem" class="problem-section">
+            <div class="container">
+                <h2 class="section-title">The Beauty Industry Has a Trust Problem</h2>
+                <p class="section-subtitle">🚨 We're changing that, one verified review at a time!</p>
+                <div class="problems-grid">
+                    <div class="problem-card">
+                        <span class="problem-icon">🎭</span>
+                        <h3>Fake Reviews Everywhere</h3>
+                        <p>Identical 5-star reviews from "verified" buyers who clearly never used the product. The authenticity you crave has been replaced by manipulation.</p>
+                        <div class="color-bar" style="background: linear-gradient(90deg, #ff9bb3 0%, #87ceeb 100%);"></div>
+                    </div>
+                    <div class="problem-card">
+                        <span class="problem-icon">💸</span>
+                        <h3>Influencer Theater</h3>
+                        <p>That $150 serum your favorite creator "swears by"? Sponsored content disguised as honest advice. When did authenticity become so expensive?</p>
+                        <div class="color-bar" style="background: linear-gradient(90deg, #fffacd 0%, #ff9bb3 100%);"></div>
+                    </div>
+                    <div class="problem-card">
+                        <span class="problem-icon">💔</span>
+                        <h3>Broken Promises</h3>
+                        <p>Another "miracle" product that works for everyone except you. Your skin didn't transform, your wallet got lighter, and trust feels impossible.</p>
+                        <div class="color-bar" style="background: linear-gradient(90deg, #87ceeb 0%, #fffacd 100%);"></div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <p style="font-size: 1.4rem; color: #ff9bb3; font-weight: 600; animation: fadeInUp 1s ease;">💖 You deserve better. We're building it. 💖</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="solution-section">
+            <div class="container">
+                <h2 class="section-title">✨ Introducing Beautora ✨</h2>
+                <p class="section-subtitle">A beauty platform built by the community, for the community. Where every review is verified and every recommendation is earned.</p>
+                
+                <div class="solution-features">
+                    <div class="feature-card">
+                        <span class="feature-icon">✅</span>
+                        <h3>Receipt-Verified Reviews</h3>
+                        <p>Upload your purchase receipt to leave a review. No receipt, no review. Finally, proof that reviewers actually bought what they're discussing.</p>
+                        <div style="height: 4px; background: linear-gradient(90deg, #ff9bb3 0%, rgba(255,255,255,0.3) 100%); border-radius: 2px; animation: colorPulse 2s ease-in-out infinite;"></div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🧠</span>
+                        <h3>Intelligent Beauty Insights</h3>
+                        <p>AI-powered summaries of what actually works for your skin type, concerns, and budget. Personalized recommendations that cut through the noise.</p>
+                        <div style="height: 4px; background: linear-gradient(90deg, #87ceeb 0%, rgba(255,255,255,0.3) 100%); border-radius: 2px; animation: colorPulse 2s ease-in-out infinite;"></div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">👥</span>
+                        <h3>Community-Governed</h3>
+                        <p>The community curates content quality and builds user reputation. No algorithms pushing sponsored content. Real people helping real people.</p>
+                        <div style="height: 4px; background: linear-gradient(90deg, #fffacd 0%, rgba(255,255,255,0.3) 100%); border-radius: 2px; animation: colorPulse 2s ease-in-out infinite;"></div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🚫</span>
+                        <h3>Completely Independent</h3>
+                        <p>We don't sell products or accept advertising revenue. Our only mission is connecting you with beauty products that genuinely work.</p>
+                        <div style="height: 4px; background: linear-gradient(90deg, #ff9bb3 0%, #87ceeb 100%); border-radius: 2px; animation: colorPulse 2s ease-in-out infinite;"></div>
+                    </div>
