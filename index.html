@@ -412,6 +412,19 @@
             color: #553C9A;
         }
         
+        .cta-button.primary {
+            background: white;
+            color: black;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button.primary:hover {
+            background: #f8f8f8;
+            color: black;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
         main {
             margin-top: 80px;
         }
@@ -472,10 +485,11 @@
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             gap: 2rem;
             margin: 3rem auto;
-            max-width: 800px;
+            max-width: 600px;
         }
         
         .stat-card {
@@ -510,6 +524,7 @@
         .solution-section {
             padding: 80px 0;
             background: rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         
         .solution-features {
@@ -653,8 +668,10 @@
             }
             
             .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
                 gap: 1.5rem;
+                max-width: 500px;
             }
             
             .stat-number {
@@ -676,7 +693,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">Beautora</div>
-                <a href="#waitlist" class="cta-button">Join Waitlist</a>
+                <a href="https://form.typeform.com/to/t28gxL74" target="_blank" class="cta-button primary">Join the Waitlist</a>
             </div>
         </div>
     </header>
@@ -686,7 +703,8 @@
             <div class="container">
                 <h1>Beauty Reviews You Can Actually Trust</h1>
                 <p class="subtitle">Verified purchases. Real results. Community-powered insights.</p>
-                <a href="#waitlist" class="cta-button hero-cta">Join the Movement</a>
+                <a href="https://form.typeform.com/to/t28gxL74" target="_blank" class="cta-button hero-cta primary">Join the Waitlist</a>
+                <a href="https://form.typeform.com/to/SAYZbVpF" target="_blank" class="cta-button secondary hero-cta">Share Your Experience</a>
             </div>
         </section>
 
@@ -718,7 +736,7 @@
                 </div>
                 
                 <div class="problem-cta">
-                    <a href="#waitlist" class="cta-button">Fix This With Us</a>
+                    <a href="https://form.typeform.com/to/SAYZbVpF" target="_blank" class="cta-button">Let's Revolutionize Together</a>
                 </div>
             </div>
         </section>
@@ -753,8 +771,8 @@
                 <h2 class="section-title">Be First to Try Beautora</h2>
                 <p class="section-subtitle">Join thousands who want honest beauty reviews</p>
                 
-                <form class="email-form" id="waitlistForm">
-                    <input type="email" class="email-input" placeholder="Enter your email" required id="emailInput">
+                <form class="email-form" action="https://form.typeform.com/to/t28gxL74" method="get" target="_blank">
+                    <input type="email" class="email-input" placeholder="Enter your email" name="email" required id="emailInput">
                     <button type="submit" class="cta-button">Join Waitlist</button>
                 </form>
                 
@@ -787,27 +805,10 @@
             });
         });
 
-        // Form handling
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('emailInput').value;
-            
-            const emails = window.waitlistEmails || [];
-            emails.push({
-                email: email,
-                timestamp: new Date().toISOString(),
-                source: 'landing_page'
-            });
-            window.waitlistEmails = emails;
-            
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('emailInput').value = '';
-            
-            document.getElementById('successMessage').scrollIntoView({
-                behavior: 'smooth'
-            });
-            
-            console.log('Beautora waitlist signup:', email);
+        // Form handling - now goes to Typeform
+        document.querySelector('.email-form').addEventListener('submit', function(e) {
+            // Let the form submit naturally to Typeform
+            console.log('Redirecting to Typeform waitlist...');
         });
     </script>
 </body>
